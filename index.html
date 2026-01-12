@@ -7,7 +7,8 @@
     <title>우리반 교실 허브</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Yeon+Sung&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -30,6 +31,10 @@
                 <button class="nav-card" data-target="links">
                     <span class="icon">🔗</span>
                     <span class="label">바로가기</span>
+                </button>
+                <button class="nav-card" data-target="guestbook">
+                    <span class="icon">📝</span>
+                    <span class="label">방명록</span>
                 </button>
                 <button class="nav-card" data-target="games">
                     <span class="icon">🎮</span>
@@ -54,8 +59,7 @@
                     <h3>오늘의 날씨</h3>
                     <div class="weather-placeholder">맑음 ☀️ 24°C</div>
                 </div>
-                <div class="widget center-widget">
-                    <h2>오늘도 즐거운 하루! 👋</h2>
+                <div class="widget center-widget" style="display:flex; align-items:center; justify-content:center;">
                     <div class="date-display" id="current-date"></div>
                 </div>
                 <div class="widget">
@@ -75,6 +79,29 @@
                 <h2>바로가기 링크</h2>
                 <div class="links-grid" id="links-container">
                     <!-- Links inserted by JS -->
+                </div>
+            </section>
+
+            <section id="guestbook" class="hidden-section">
+                <h2>📝 우리반 방명록</h2>
+                <div class="guestbook-input-area">
+                    <textarea id="guest-msg" placeholder="여기에 친구들에게 하고 싶은 말을 남겨보세요! (최대 50자)" maxlength="50"></textarea>
+                    <div class="input-actions">
+                        <div id="color-picker" class="color-picker">
+                            <button class="color-btn selected" data-color="#fffcd0"
+                                style="background:#fffcd0;"></button> <!-- Classic Yellow -->
+                            <button class="color-btn" data-color="#ffccdd" style="background:#ffccdd;"></button>
+                            <!-- Pink -->
+                            <button class="color-btn" data-color="#ccffcc" style="background:#ccffcc;"></button>
+                            <!-- Green -->
+                            <button class="color-btn" data-color="#ccf2ff" style="background:#ccf2ff;"></button>
+                            <!-- Blue -->
+                        </div>
+                        <button id="post-note-btn" class="primary-btn">붙이기</button>
+                    </div>
+                </div>
+                <div id="guestbook-wall" class="guestbook-wall">
+                    <!-- Notes go here -->
                 </div>
             </section>
 

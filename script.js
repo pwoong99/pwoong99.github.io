@@ -3,6 +3,7 @@ import initGames from './modules/games.js';
 import initTimer from './modules/timer.js';
 import initSeating from './modules/seating.js';
 import initTimetable from './modules/timetable.js';
+import initGuestbook from './modules/guestbook.js';
 import { initWeather, initQuotes, initVisitorCount } from './modules/widgets.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -84,8 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
     try { initGames(); } catch (e) { console.error("Games Init Failed", e); }
     try { initTimer(); } catch (e) { console.error("Timer Init Failed", e); }
     try { initSeating(); } catch (e) { console.error("Seating Init Failed", e); }
-
     try { initTimetable(); } catch (e) { console.error("Timetable Init Failed", e); }
+    try { initGuestbook(); } catch (e) { console.error("Guestbook Init Failed", e); }
 
     window.appInitialized = true;
 });

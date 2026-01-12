@@ -8,25 +8,32 @@ export function initWeather() {
     function fetchWeather(lat, lon) {
         weatherEl.textContent = '날씨 불러오는 중...';
 
-        // Using Open-Meteo API (Free, no key required)
-        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&timezone=auto`;
+        // 1. Get Location Name (Reverse Geocoding)
+        const geoUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=ko`;
 
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                const temp = Math.round(data.current_weather.temperature);
-                const code = data.current_weather.weathercode;
-                const desc = getWeatherDesc(code);
+        // 2. Get Weather
+        const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&timezone=auto`;
 
-                weatherEl.innerHTML = `
-                    <div style="font-size: 1.5rem; font-weight: bold;">${desc} ${getWeatherIcon(code)}</div>
-                    <div>기온: ${temp}°C</div>
-                `;
-            })
-            .catch(err => {
-                console.error(err);
-                weatherEl.textContent = '날씨 정보 획득 실패';
-            });
+        Promise.all([
+            fetch(geoUrl).then(res => res.json()),
+            fetch(weatherUrl).then(res => res.json())
+        ]).then(([geoData, weatherData]) => {
+            const city = geoData.locality || geoData.city || geoData.principalSubdivision || "내 위치";
+            const temp = Math.round(weatherData.current_weather.temperature);
+            const code = weatherData.current_weather.weathercode;
+            const desc = getWeatherDesc(code);
+
+            weatherEl.innerHTML = `
+                <div style="font-size: 1.2rem; margin-bottom: 5px;">📍 ${city}</div>
+                <div style="font-size: 1.8rem; font-weight: bold;">
+                    ${getWeatherIcon(code)} ${temp}°C
+                </div>
+                <div style="font-size: 1rem; opacity: 0.8;">${desc}</div>
+            `;
+        }).catch(err => {
+            console.error(err);
+            weatherEl.textContent = '날씨 정보 획득 실패';
+        });
     }
 
     if (navigator.geolocation) {
