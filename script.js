@@ -3,7 +3,6 @@ import initGames from './modules/games.js';
 import initTimer from './modules/timer.js';
 import initSeating from './modules/seating.js';
 import initTimetable from './modules/timetable.js';
-import initTimetable from './modules/timetable.js';
 import initGuestbook from './modules/guestbook.js';
 import initRandomDraw from './modules/randomDraw.js';
 import { initWeather, initQuotes, initVisitorCount } from './modules/widgets.js';
