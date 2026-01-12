@@ -23,6 +23,17 @@ document.addEventListener('DOMContentLoaded', () => {
         initVisitorCount();
     } catch (e) { console.error("Visitor Init Failed", e); }
 
+
+
+    // Date Display
+    const updateDate = () => {
+        const now = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const dateEl = document.getElementById('current-date');
+        if (dateEl) dateEl.textContent = now.toLocaleDateString('ko-KR', options);
+    };
+    updateDate();
+
     // Navigation Logic
     const navCards = document.querySelectorAll('.nav-card');
     const homeBtn = document.getElementById('global-home-btn');
@@ -56,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Initialize Modules
-    let timerModule, seatingModule; // Store instances
+    let timerModule, seatingModule, randomDrawModule; // Store instances
 
     try { initLinks(); } catch (e) { console.error("Links Init Failed", e); }
     try { initGames(); } catch (e) { console.error("Games Init Failed", e); }
@@ -64,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try { seatingModule = initSeating(); } catch (e) { console.error("Seating Init Failed", e); }
     try { initTimetable(); } catch (e) { console.error("Timetable Init Failed", e); }
     try { initGuestbook(); } catch (e) { console.error("Guestbook Init Failed", e); }
-    try { initRandomDraw(); } catch (e) { console.error("RandomDraw Init Failed", e); }
+    try { randomDrawModule = initRandomDraw(); } catch (e) { console.error("RandomDraw Init Failed", e); }
 
     window.appInitialized = true;
 
@@ -87,5 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Reset Modules
         if (timerModule && timerModule.reset) timerModule.reset();
         if (seatingModule && seatingModule.reset) seatingModule.reset();
+        if (randomDrawModule && randomDrawModule.reset) randomDrawModule.reset();
     });
 });

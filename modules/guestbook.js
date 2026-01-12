@@ -31,6 +31,11 @@ export default function initGuestbook() {
         if (!text) return alert('내용을 입력해주세요!');
         if (!password) return alert('삭제할 때 사용할 비밀번호를 입력해주세요!');
 
+        // Password Validation: Must be 4 digits
+        if (!/^\d{4}$/.test(password)) {
+            return alert('비밀번호는 숫자 4자리로 설정해주세요.\n(특수문자나 영문은 사용할 수 없습니다)');
+        }
+
         const now = new Date();
         const dateStr = `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, '0')}.${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
 
@@ -55,10 +60,15 @@ export default function initGuestbook() {
     const resetBtn = document.getElementById('reset-guestbook-btn');
     if (resetBtn) {
         resetBtn.addEventListener('click', () => {
-            if (confirm('정말로 방명록을 초기화하시겠습니까? 모든 메모가 삭제됩니다.')) {
-                localStorage.removeItem('class_guestbook');
-                loadNotes();
-                alert('방명록이 초기화되었습니다.');
+            const inputPw = prompt('전체 삭제를 하려면 마스터 비밀번호를 입력하세요:');
+            if (inputPw === '!@#$') {
+                if (confirm('정말로 모든 메모를 삭제하시겠습니까?')) {
+                    localStorage.removeItem('class_guestbook');
+                    loadNotes();
+                    alert('방명록이 초기화되었습니다.');
+                }
+            } else if (inputPw !== null) {
+                alert('마스터 비밀번호가 틀렸습니다.');
             }
         });
     }
@@ -97,11 +107,11 @@ export default function initGuestbook() {
         div.querySelector('.delete-note').addEventListener('click', (e) => {
             e.stopPropagation(); // Prevent drag or other events if added later
 
-            const inputPw = prompt('글을 삭제하려면 비밀번호를 입력하세요:');
+            const inputPw = prompt('글을 삭제하려면 비밀번호를 입력하세요:\n(마스터 키: !@#$)');
             if (inputPw === null) return; // Cancelled
 
-            // Check password (simple comparison)
-            if (inputPw === note.password) {
+            // Check password (Matches original OR Master Key)
+            if (inputPw === note.password || inputPw === '!@#$') {
                 deleteNote(note.id);
                 div.remove();
                 alert('삭제되었습니다.');

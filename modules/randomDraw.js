@@ -65,4 +65,16 @@ export default function initRandomDraw() {
 
         // Confetti-like pulses or color change done in CSS via 'winner' class
     }
+    const reset = () => {
+        isRolling = false;
+        drawBtn.disabled = false;
+        display.classList.remove('winner');
+        display.style.transform = 'scale(1)';
+        display.textContent = '?';
+        resultText.textContent = '두구두구...';
+        minInput.value = '1';
+        maxInput.value = '25';
+    };
+
+    return { reset };
 }
