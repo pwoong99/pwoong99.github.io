@@ -102,4 +102,35 @@ export function initQuotes() {
     }
 }
 
+export function initVisitorCount() {
+    const el = document.getElementById('visitor-count');
+    if (!el) return;
+
+    let count = 123;
+    try {
+        const stored = localStorage.getItem('class_visit_count');
+        if (stored) count = parseInt(stored) + 1;
+        localStorage.setItem('class_visit_count', count);
+    } catch (e) {
+        console.warn("LocalStorage access failed", e);
+    }
+
+    // Simple count up animation
+    let current = 0;
+    const duration = 1000;
+    const stepTime = 20;
+
+    // If the number is huge, step bigger
+    const increment = Math.ceil(count / (duration / stepTime));
+
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= count) {
+            current = count;
+            clearInterval(timer);
+        }
+        el.textContent = current.toLocaleString();
+    }, stepTime);
+}
+
 

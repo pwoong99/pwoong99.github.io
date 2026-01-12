@@ -145,6 +145,18 @@
     </div>
 
     <script type="module" src="script.js"></script>
+    <script>
+        // Safety check for module loading issues (e.g. file:// protocol blocking)
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                if (!window.appInitialized) {
+                    console.warn("App script did not initialize. Check if running via local server.");
+                    // Optional: Visual cue for the user?
+                    // alert("스크립트가 로딩되지 않았습니다. 파일로 직접 열지 말고 라이브 서버를 사용해주세요.");
+                }
+            }, 500);
+        });
+    </script>
 </body>
 
 </html>
