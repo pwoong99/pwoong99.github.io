@@ -1,0 +1,529 @@
+:root {
+    --bg-color: #FAF3E0;
+    /* Light Warm Beige */
+    --card-bg: #FFFFFF;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --accent-color: #E07A5F;
+    --font-family: 'Outfit', sans-serif;
+    --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    color: var(--text-primary);
+    background-color: var(--bg-color);
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Cleanup background mesh */
+.background-mesh {
+    display: none;
+}
+
+/* Layout Container */
+.app-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Floating Home Button */
+.floating-home {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    padding: 12px 24px;
+    background: var(--text-primary);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.floating-home:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.floating-home.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-20px);
+}
+
+/* Visibility Utilities */
+.hidden-section {
+    display: none !important;
+}
+
+.active-section {
+    display: block !important;
+    opacity: 1;
+    z-index: 200;
+    /* Highest priority */
+    animation: fadeIn 0.4s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Home Dashboard --- */
+/* --- Home Dashboard --- */
+.dashboard-layout {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.5s;
+    z-index: 100;
+    /* Ensure it is ON TOP of everything else when visible */
+    padding-bottom: 50px;
+}
+
+.home-title {
+    text-align: center;
+    margin-bottom: 50px;
+    animation: fadeIn 0.8s ease-out;
+}
+
+.home-title h1 {
+    font-size: 3.5rem;
+    /* Larger Title */
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.2;
+    margin: 0;
+    text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.5);
+}
+
+/* --- Feature Content Frame --- */
+.content-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 50;
+    /* Lower than dashboard when dashboard is active */
+}
+
+/* Ensure active section is interactable and visible */
+.content-frame section.active-section {
+    pointer-events: auto;
+    z-index: 60;
+    /* ... rest of styles inherited or defined below ... */
+}
+
+.nav-grid {
+    display: flex;
+    /* Flexbox for better centering */
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    /* Allow wrapping if screen is small */
+    gap: 30px;
+    max-width: 1200px;
+    width: 100%;
+    margin-bottom: 60px;
+    padding: 0 20px;
+}
+
+.nav-card {
+    width: 180px;
+    /* Fixed, larger size */
+    height: 180px;
+    background: var(--card-bg);
+    border-radius: 30px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    /* Stronger shadow */
+    color: var(--text-primary);
+}
+
+.nav-card:active {
+    transform: scale(0.95);
+}
+
+.nav-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+    border-color: var(--accent-color);
+}
+
+.nav-card .icon {
+    font-size: 4rem;
+    /* Larger Icon */
+    margin-bottom: 15px;
+}
+
+.nav-card .label {
+    font-size: 1.4rem;
+    /* Larger Text */
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* --- Bottom Widgets --- */
+.bottom-widgets {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+    width: 90%;
+    max-width: 1000px;
+}
+
+.widget {
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    flex: 1;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.widget h3 {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.center-widget {
+    flex: 1.5;
+    background: var(--text-primary);
+    color: white;
+}
+
+.center-widget h2 {
+    font-size: 2rem;
+    margin: 0;
+    margin-bottom: 10px;
+    background: none;
+    -webkit-text-fill-color: initial;
+    color: white;
+}
+
+.center-widget h3 {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.date-display {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* --- Feature Content Frame --- */
+.content-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    /* Let clicks pass through when hidden */
+}
+
+/* Active sections take over */
+.content-frame section.active-section {
+    pointer-events: auto;
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1200px;
+    height: calc(100vh - 120px);
+    background: white;
+    border-radius: 30px;
+    padding: 40px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    animation: fadeIn 0.4s ease-out;
+}
+
+/* Dashboard Cards */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    /* Light border */
+}
+
+h2 {
+    font-size: 2rem;
+    color: var(--text-primary);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Links */
+.links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.link-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    background: #f8f9fa;
+    /* Light grey */
+    border-radius: 15px;
+    text-decoration: none;
+    color: var(--text-primary);
+    /* Dark text */
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.link-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-soft);
+    background: white;
+}
+
+.link-icon {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+/* Timer */
+.timer-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.timer-display {
+    font-size: 15rem;
+    /* Adjusted back for layout balance */
+    font-family: monospace;
+    font-weight: 700;
+    color: var(--text-primary);
+    /* Dark text */
+    margin: 10px 0;
+    line-height: 1;
+}
+
+.timer-controls input {
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    color: var(--text-primary);
+    width: 80px;
+    font-size: 1.2rem;
+    margin: 0 5px;
+    text-align: center;
+}
+
+/* Buttons */
+.primary-btn,
+.secondary-btn {
+    padding: 12px 25px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: transform 0.1s;
+    margin: 5px;
+}
+
+.primary-btn {
+    background: var(--text-primary);
+    color: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.secondary-btn {
+    background: #e0e0e0;
+    color: #333;
+}
+
+.primary-btn:active,
+.secondary-btn:active {
+    transform: scale(0.95);
+}
+
+/* Seating */
+.seating-controls {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+    justify-content: center;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+/* Seating Misc */
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.input-group input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    background: white;
+}
+
+.seating-grid {
+    display: grid;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.seat {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    font-weight: 600;
+    border: 1px solid #eee;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    animation: popIn 0.3s ease forwards;
+    color: var(--text-primary);
+}
+
+@keyframes popIn {
+    from {
+        transform: scale(0);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+/* Timetable */
+.timetable-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 5px;
+    margin-top: 20px;
+    table-layout: fixed;
+    /* Fixed width columns */
+}
+
+.timetable-table th,
+.timetable-table td {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    text-align: center;
+    height: 60px;
+    vertical-align: middle;
+}
+
+.timetable-table th {
+    background: #eee;
+    color: #555;
+    font-weight: 600;
+}
+
+.timetable-table td {
+    background: #f9f9f9;
+    transition: background 0.2s;
+    border: 1px solid transparent;
+}
+
+.timetable-table td.drag-over {
+    background: #eef;
+    border: 2px dashed #E07A5F;
+}
+
+/* Palette */
+.subject-palette {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 15px;
+    justify-content: center;
+    border: 1px solid #eee;
+}
+
+.subject-item {
+    padding: 8px 15px;
+    background: linear-gradient(135deg, #E07A5F, #F4A261);
+    /* Warm Gradient */
+    border-radius: 20px;
+    cursor: grab;
+    user-select: none;
+    font-size: 0.9rem;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    color: white;
+}
+
+.subject-item:active {
+    cursor: grabbing;
+    transform: scale(0.95);
+}
+
+/* Placed item in cell */
+.placed-subject {
+    display: flex;
+    padding: 5px;
+    background: #E07A5F;
+    color: white;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: grab;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
