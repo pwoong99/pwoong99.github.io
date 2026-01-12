@@ -31,12 +31,16 @@ export default function initGuestbook() {
         if (!text) return alert('내용을 입력해주세요!');
         if (!password) return alert('삭제할 때 사용할 비밀번호를 입력해주세요!');
 
+        const now = new Date();
+        const dateStr = `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, '0')}.${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
         const note = {
             id: Date.now(),
             text: text,
             author: author,
             password: password,
             color: selectedColor,
+            date: dateStr,
             rotate: Math.random() * 10 - 5 // -5deg to +5deg
         };
 
@@ -46,6 +50,18 @@ export default function initGuestbook() {
         nameInput.value = '';
         pwInput.value = '';
     });
+
+    // Clear All Logic
+    const resetBtn = document.getElementById('reset-guestbook-btn');
+    if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+            if (confirm('정말로 방명록을 초기화하시겠습니까? 모든 메모가 삭제됩니다.')) {
+                localStorage.removeItem('class_guestbook');
+                loadNotes();
+                alert('방명록이 초기화되었습니다.');
+            }
+        });
+    }
 
     function saveNote(note) {
         let notes = JSON.parse(localStorage.getItem('class_guestbook')) || [];
@@ -65,9 +81,15 @@ export default function initGuestbook() {
         div.style.backgroundColor = note.color;
         div.style.transform = `rotate(${note.rotate}deg)`;
 
+        // Handle legacy notes without date
+        const dateDisplay = note.date ? `<div class="note-date">${note.date}</div>` : '';
+
         div.innerHTML = `
             <div class="note-content">${note.text}</div>
-            <div class="note-author">From ${note.author}</div>
+            <div class="note-meta">
+                <div class="note-author">From ${note.author}</div>
+                ${dateDisplay}
+            </div>
             <button class="delete-note" title="삭제">&times;</button>
         `;
 

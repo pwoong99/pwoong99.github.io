@@ -137,4 +137,15 @@ export default function initSeating() {
             grid.appendChild(seat);
         }
     });
+
+    return {
+        reset: () => {
+            grid.innerHTML = '';
+            totalInput.value = '';
+            if (fixStudentInput) fixStudentInput.value = '';
+            if (fixSeatInput) fixSeatInput.value = '';
+            fixedRules = [];
+            if (rulesList) rulesList.innerHTML = '';
+        }
+    };
 }

@@ -3,7 +3,9 @@ import initGames from './modules/games.js';
 import initTimer from './modules/timer.js';
 import initSeating from './modules/seating.js';
 import initTimetable from './modules/timetable.js';
+import initTimetable from './modules/timetable.js';
 import initGuestbook from './modules/guestbook.js';
+import initRandomDraw from './modules/randomDraw.js';
 import { initWeather, initQuotes, initVisitorCount } from './modules/widgets.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -54,7 +56,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Back to Home
+    // Initialize Modules
+    let timerModule, seatingModule; // Store instances
+
+    try { initLinks(); } catch (e) { console.error("Links Init Failed", e); }
+    try { initGames(); } catch (e) { console.error("Games Init Failed", e); }
+    try { timerModule = initTimer(); } catch (e) { console.error("Timer Init Failed", e); }
+    try { seatingModule = initSeating(); } catch (e) { console.error("Seating Init Failed", e); }
+    try { initTimetable(); } catch (e) { console.error("Timetable Init Failed", e); }
+    try { initGuestbook(); } catch (e) { console.error("Guestbook Init Failed", e); }
+    try { initRandomDraw(); } catch (e) { console.error("RandomDraw Init Failed", e); }
+
+    window.appInitialized = true;
+
+    // Back to Home (Reset Logic)
     homeBtn.addEventListener('click', () => {
         console.log("Returning to Home");
         // Hide all frames
@@ -69,24 +84,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Hide Home Button
         homeBtn.classList.add('hidden');
+
+        // Reset Modules
+        if (timerModule && timerModule.reset) timerModule.reset();
+        if (seatingModule && seatingModule.reset) seatingModule.reset();
     });
-
-    // Date Display
-    const updateDate = () => {
-        const now = new Date();
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        const dateEl = document.getElementById('current-date');
-        if (dateEl) dateEl.textContent = now.toLocaleDateString('ko-KR', options);
-    };
-    updateDate();
-
-    // Initialize Modules
-    try { initLinks(); } catch (e) { console.error("Links Init Failed", e); }
-    try { initGames(); } catch (e) { console.error("Games Init Failed", e); }
-    try { initTimer(); } catch (e) { console.error("Timer Init Failed", e); }
-    try { initSeating(); } catch (e) { console.error("Seating Init Failed", e); }
-    try { initTimetable(); } catch (e) { console.error("Timetable Init Failed", e); }
-    try { initGuestbook(); } catch (e) { console.error("Guestbook Init Failed", e); }
-
-    window.appInitialized = true;
 });

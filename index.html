@@ -52,6 +52,11 @@
                     <span class="icon">📝</span>
                     <span class="label">방명록</span>
                 </button>
+                <!-- Row 3 -->
+                <button class="nav-card" data-target="random">
+                    <span class="icon">🎰</span>
+                    <span class="label">랜덤추첨</span>
+                </button>
             </div>
 
             <div class="bottom-widgets">
@@ -102,6 +107,10 @@
                             <!-- Blue -->
                         </div>
                         <button id="post-note-btn" class="primary-btn">붙이기</button>
+                    </div>
+                    <div style="text-align: right; margin-top: 5px;">
+                        <button id="reset-guestbook-btn" class="secondary-btn small-btn"
+                            style="font-size: 0.8rem; padding: 5px 10px;">🗑️ 전체 삭제</button>
                     </div>
                 </div>
                 <div id="guestbook-wall" class="guestbook-wall">
@@ -162,6 +171,23 @@
                 </div>
 
                 <div class="seating-grid" id="seating-grid"></div>
+            </section>
+
+            <section id="random" class="hidden-section">
+                <h2>🎰 행운의 번호 추첨</h2>
+                <div class="draw-container">
+                    <div class="draw-controls">
+                        <label>범위:</label>
+                        <input type="number" id="draw-min" value="1" min="1">
+                        <span>~</span>
+                        <input type="number" id="draw-max" value="25" min="1">
+                        <button id="start-draw-btn" class="primary-btn">추첨 시작!</button>
+                    </div>
+                    <div class="draw-display-box">
+                        <div id="draw-display">?</div>
+                        <div id="draw-result">두구두구...</div>
+                    </div>
+                </div>
             </section>
 
             <section id="timetable" class="hidden-section">

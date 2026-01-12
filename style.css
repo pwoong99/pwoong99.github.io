@@ -97,25 +97,29 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    /* Vertical Center */
     align-items: center;
+    /* Horizontal Center */
     position: absolute;
     top: 0;
     left: 0;
     transition: opacity 0.5s;
     z-index: 100;
-    /* Ensure it is ON TOP of everything else when visible */
-    /* Removed padding to center strictly */
+    /* Shifting visual center down as requested */
+    padding-top: 150px;
+    box-sizing: border-box;
 }
 
 .home-title {
     text-align: center;
     margin-bottom: 50px;
     animation: fadeIn 0.8s ease-out;
+    width: 100%;
+    /* Ensure full width for centering */
 }
 
 .home-title h1 {
     font-size: 3.5rem;
-    /* Larger Title */
     font-weight: 800;
     color: var(--text-primary);
     line-height: 1.2;
@@ -123,7 +127,8 @@ body {
     text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.5);
 }
 
-/* --- Feature Content Frame --- */
+/* ... content-frame styles ... */
+
 .content-frame {
     position: absolute;
     top: 0;
@@ -132,14 +137,11 @@ body {
     height: 100%;
     pointer-events: none;
     z-index: 50;
-    /* Lower than dashboard when dashboard is active */
 }
 
-/* Ensure active section is interactable and visible */
 .content-frame section.active-section {
     pointer-events: auto;
     z-index: 60;
-    /* ... rest of styles inherited or defined below ... */
 }
 
 .nav-grid {
@@ -149,11 +151,11 @@ body {
     justify-content: center;
     align-content: center;
     gap: 40px;
-    /* Slightly more gap for breathability */
     max-width: 900px;
     width: 100%;
-    margin-bottom: 60px;
     padding: 0 20px;
+    margin: 0 auto 60px auto;
+    /* Explicit horizontal centering */
 }
 
 /* Responsiveness for smaller screens (Tablets/Phones) */
@@ -626,7 +628,91 @@ h2 {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* --- Guestbook --- */
+
+/* --- Random Draw --- */
+.draw-container {
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.draw-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    background: #f8f9fa;
+    padding: 15px 30px;
+    border-radius: 20px;
+    border: 1px solid #eee;
+}
+
+.draw-controls input {
+    width: 60px;
+    padding: 10px;
+    font-size: 1.2rem;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.draw-display-box {
+    width: 300px;
+    height: 300px;
+    background: white;
+    border-radius: 50%;
+    /* Circle */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    border: 5px solid #f0f0f0;
+    margin-bottom: 20px;
+    transition: all 0.3s;
+}
+
+#draw-display {
+    font-size: 8rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    font-family: 'Outfit', sans-serif;
+    line-height: 1;
+}
+
+#draw-result {
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+/* Winner Animation */
+.winner {
+    animation: winnerPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    color: #E07A5F !important;
+    text-shadow: 0 5px 15px rgba(224, 122, 95, 0.4);
+}
+
+@keyframes winnerPop {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* --- Guestbook (Original Position) --- */
 .guestbook-input-area {
     background: #fff;
     padding: 20px;
@@ -738,12 +824,23 @@ h2 {
     justify-content: center;
 }
 
+.note-meta {
+    width: 100%;
+}
+
 .note-author {
     font-size: 0.9rem;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.7);
     margin-top: 5px;
     font-family: 'Outfit', sans-serif;
-    /* Clean font for name */
+    line-height: 1;
+}
+
+.note-date {
+    font-size: 0.7rem;
+    color: rgba(0, 0, 0, 0.5);
+    font-family: 'Outfit', sans-serif;
+    margin-top: 2px;
 }
 
 .sticky-note:hover {

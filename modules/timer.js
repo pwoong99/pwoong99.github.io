@@ -58,7 +58,7 @@ export default function initTimer() {
         }, 1000);
     });
 
-    resetBtn.addEventListener('click', () => {
+    const reset = () => {
         clearInterval(timerInterval);
         isRunning = false;
         totalSeconds = 0;
@@ -68,6 +68,10 @@ export default function initTimer() {
         startBtn.textContent = '시작';
         startBtn.style.opacity = '1';
         displayElement.textContent = "00:00";
-        displayElement.style.color = "#ffffff";
-    });
+        displayElement.style.color = "";
+    };
+
+    resetBtn.addEventListener('click', reset);
+
+    return { reset };
 }
