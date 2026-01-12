@@ -636,15 +636,23 @@ h2 {
     border: 1px solid #eee;
 }
 
-#guest-name {
-    width: 100%;
+.guest-info-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+#guest-name,
+#guest-pw {
+    flex: 1;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 10px;
     font-size: 1rem;
     font-family: 'Outfit', sans-serif;
-    margin-bottom: 10px;
     background: #f9f9f9;
+    margin-bottom: 0;
+    /* Handled by row margin */
 }
 
 #guest-msg {

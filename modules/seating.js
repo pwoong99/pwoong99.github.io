@@ -1,6 +1,6 @@
 export default function initSeating() {
     const totalInput = document.getElementById('total-students');
-    const colsInput = document.getElementById('columns-count');
+    // const colsInput = document.getElementById('columns-count'); // Removed
     const generateBtn = document.getElementById('generate-seats');
     const grid = document.getElementById('seating-grid');
 
@@ -52,7 +52,6 @@ export default function initSeating() {
     // --- Generation Logic ---
     generateBtn.addEventListener('click', () => {
         const total = parseInt(totalInput.value);
-        const cols = parseInt(colsInput.value) || 5;
 
         if (!total || total < 1) {
             alert('학생 수를 입력해주세요!');
@@ -105,7 +104,8 @@ export default function initSeating() {
         });
 
         // 4. Render
-        grid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+        // Responsive Grid: auto-fit to fill available space
+        grid.style.gridTemplateColumns = `repeat(auto-fit, minmax(100px, 1fr))`;
         grid.innerHTML = '';
 
         for (let i = 1; i <= total; i++) {
