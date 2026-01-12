@@ -56,22 +56,7 @@ export default function initGuestbook() {
         pwInput.value = '';
     });
 
-    // Clear All Logic
-    const resetBtn = document.getElementById('reset-guestbook-btn');
-    if (resetBtn) {
-        resetBtn.addEventListener('click', () => {
-            const inputPw = prompt('전체 삭제를 하려면 마스터 비밀번호를 입력하세요:');
-            if (inputPw === '!@#$') {
-                if (confirm('정말로 모든 메모를 삭제하시겠습니까?')) {
-                    localStorage.removeItem('class_guestbook');
-                    loadNotes();
-                    alert('방명록이 초기화되었습니다.');
-                }
-            } else if (inputPw !== null) {
-                alert('마스터 비밀번호가 틀렸습니다.');
-            }
-        });
-    }
+    // Clear All Logic Removed as per request
 
     function saveNote(note) {
         let notes = JSON.parse(localStorage.getItem('class_guestbook')) || [];
@@ -107,10 +92,11 @@ export default function initGuestbook() {
         div.querySelector('.delete-note').addEventListener('click', (e) => {
             e.stopPropagation(); // Prevent drag or other events if added later
 
-            const inputPw = prompt('글을 삭제하려면 비밀번호를 입력하세요:\n(마스터 키: !@#$)');
+            // Removed Master Key Hint from user view
+            const inputPw = prompt('글을 삭제하려면 비밀번호를 입력하세요:');
             if (inputPw === null) return; // Cancelled
 
-            // Check password (Matches original OR Master Key)
+            // Check password (Matches original OR Master Key - hidden feature)
             if (inputPw === note.password || inputPw === '!@#$') {
                 deleteNote(note.id);
                 div.remove();
