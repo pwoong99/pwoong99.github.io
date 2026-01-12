@@ -1,5 +1,6 @@
 export default function initGuestbook() {
     const input = document.getElementById('guest-msg');
+    const nameInput = document.getElementById('guest-name');
     const postBtn = document.getElementById('post-note-btn');
     const wall = document.getElementById('guestbook-wall');
     const colorBtns = document.querySelectorAll('.color-btn');
@@ -23,19 +24,21 @@ export default function initGuestbook() {
     // Post Note
     postBtn.addEventListener('click', () => {
         const text = input.value.trim();
+        const author = nameInput.value.trim() || '익명';
         if (!text) return alert('내용을 입력해주세요!');
 
         const note = {
             id: Date.now(),
             text: text,
+            author: author,
             color: selectedColor,
-            left: Math.random() * 80 + 10, // Not used in flex layout but good for absolute
             rotate: Math.random() * 10 - 5 // -5deg to +5deg
         };
 
         saveNote(note);
         appendNote(note);
         input.value = '';
+        nameInput.value = '';
     });
 
     function saveNote(note) {
@@ -56,7 +59,8 @@ export default function initGuestbook() {
         div.style.backgroundColor = note.color;
         div.style.transform = `rotate(${note.rotate}deg)`;
         div.innerHTML = `
-            <p>${note.text}</p>
+            <div class="note-content">${note.text}</div>
+            <div class="note-author">- ${note.author} -</div>
             <button class="delete-note" title="삭제">&times;</button>
         `;
 

@@ -104,7 +104,6 @@ body {
     transition: opacity 0.5s;
     z-index: 100;
     /* Ensure it is ON TOP of everything else when visible */
-    padding-bottom: 0;
     /* Removed padding to center strictly */
 }
 
@@ -145,8 +144,8 @@ body {
 
 .nav-grid {
     display: grid;
+    /* Responsive Grid: Fits as many 180px columns as possible, then centers them */
     grid-template-columns: repeat(3, 180px);
-    /* Strictly 3 columns */
     justify-content: center;
     align-content: center;
     gap: 40px;
@@ -155,6 +154,26 @@ body {
     width: 100%;
     margin-bottom: 60px;
     padding: 0 20px;
+}
+
+/* Responsiveness for smaller screens (Tablets/Phones) */
+@media (max-width: 768px) {
+    .nav-grid {
+        grid-template-columns: repeat(2, 180px);
+        /* 2 columns on tablets */
+        gap: 20px;
+    }
+
+    .home-title h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-grid {
+        grid-template-columns: repeat(1, 180px);
+        /* 1 column on phones */
+    }
 }
 
 .nav-card {
@@ -393,40 +412,94 @@ h2 {
 }
 
 /* Seating */
-.seating-controls {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 30px;
-    justify-content: center;
+.seating-controls-container {
     background: #f8f9fa;
-    padding: 20px;
+    padding: 25px;
     border-radius: 20px;
+    margin-bottom: 30px;
+    border: 1px solid #eee;
 }
 
-/* Seating Misc */
-.input-group {
+.seating-main-settings {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 20px;
+    border-bottom: 2px dashed #eee;
+    padding-bottom: 20px;
+}
+
+.seating-exceptions {
+    text-align: center;
+}
+
+.seating-exceptions h3 {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+}
+
+.exception-input-row {
+    display: flex;
+    justify-content: center;
     align-items: center;
     gap: 10px;
+    margin-bottom: 15px;
 }
 
-.input-group input {
+.exception-input-row input {
+    width: 80px;
     padding: 8px;
+    text-align: center;
     border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1.1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.fixed-rules-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    min-height: 10px;
+}
+
+.rule-tag {
     background: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    border: 1px solid #E07A5F;
+    color: #E07A5F;
+    font-weight: bold;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    animation: popIn 0.3s ease;
+}
+
+.rule-tag button {
+    background: none;
+    border: none;
+    color: #E07A5F;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
 }
 
 .seating-grid {
     display: grid;
     gap: 15px;
     margin-top: 20px;
+    justify-content: center;
+    /* Center the grid container */
 }
 
 .seat {
     background: white;
-    padding: 20px;
+    padding: 0;
     border-radius: 15px;
     text-align: center;
     font-weight: 600;
@@ -434,6 +507,28 @@ h2 {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     animation: popIn 0.3s ease forwards;
     color: var(--text-primary);
+    aspect-ratio: 1.2;
+    /* Slightly wider cards */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.seat.fixed-seat {
+    background: #fff8f5;
+    /* Light tint for fixed seats */
+    border-color: #f4ccb9;
+}
+
+.seat.fixed-seat::after {
+    content: '🔒';
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 0.8rem;
 }
 
 @keyframes popIn {
@@ -541,6 +636,17 @@ h2 {
     border: 1px solid #eee;
 }
 
+#guest-name {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: 'Outfit', sans-serif;
+    margin-bottom: 10px;
+    background: #f9f9f9;
+}
+
 #guest-msg {
     width: 100%;
     height: 80px;
@@ -600,18 +706,36 @@ h2 {
 .sticky-note {
     width: 150px;
     height: 150px;
-    padding: 20px;
+    padding: 15px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
     font-family: 'Yeon Sung', cursive;
-    font-size: 1.2rem;
     color: #333;
     position: relative;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    /* Space between content and author */
     text-align: center;
     transition: transform 0.2s;
     word-break: break-all;
+}
+
+.note-content {
+    font-size: 1.2rem;
+    line-height: 1.2;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.note-author {
+    font-size: 0.9rem;
+    color: rgba(0, 0, 0, 0.6);
+    margin-top: 5px;
+    font-family: 'Outfit', sans-serif;
+    /* Clean font for name */
 }
 
 .sticky-note:hover {

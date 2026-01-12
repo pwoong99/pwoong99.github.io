@@ -85,6 +85,7 @@
             <section id="guestbook" class="hidden-section">
                 <h2>📝 우리반 방명록</h2>
                 <div class="guestbook-input-area">
+                    <input type="text" id="guest-name" placeholder="이름 (생략가능)" maxlength="10">
                     <textarea id="guest-msg" placeholder="여기에 친구들에게 하고 싶은 말을 남겨보세요! (최대 50자)" maxlength="50"></textarea>
                     <div class="input-actions">
                         <div id="color-picker" class="color-picker">
@@ -131,20 +132,37 @@
 
             <section id="seating" class="hidden-section">
                 <h2>번호 뽑기 자리 배치</h2>
-                <div class="seating-controls">
-                    <div class="input-group">
-                        <label>전체 학생 수</label>
-                        <input type="number" id="total-students" placeholder="25" min="1" max="100"
-                            style="width:80px; text-align:center;">
+                <div class="seating-controls-container">
+                    <!-- Main Settings -->
+                    <div class="seating-main-settings">
+                        <div class="input-group">
+                            <label>전체 학생 수</label>
+                            <input type="number" id="total-students" placeholder="25" min="1" max="50">
+                        </div>
+                        <div class="input-group">
+                            <label>한 줄에</label>
+                            <input type="number" id="columns-count" value="6" min="1" max="10">
+                            <label>명</label>
+                        </div>
+                        <button id="generate-seats" class="primary-btn">배치 시작!</button>
                     </div>
-                    <div class="input-group">
-                        <label>한 줄에</label>
-                        <input type="number" id="columns-count" value="5" min="1" max="10"
-                            style="width:60px; text-align:center;">
-                        <label>명씩</label>
+
+                    <!-- Fixed Exception Rules -->
+                    <div class="seating-exceptions">
+                        <h3>🔒 고정석 설정</h3>
+                        <div class="exception-input-row">
+                            <input type="number" id="fix-student" placeholder="학생 번호" min="1">
+                            <span>번 학생을</span>
+                            <input type="number" id="fix-seat" placeholder="자리 번호" min="1">
+                            <span>번 자리에</span>
+                            <button id="add-fix-rule" class="secondary-btn small-btn">추가</button>
+                        </div>
+                        <div id="fixed-rules-list" class="fixed-rules-list">
+                            <!-- Rules added here -->
+                        </div>
                     </div>
-                    <button id="generate-seats" class="primary-btn">번호 뽑기 시작!</button>
                 </div>
+
                 <div class="seating-grid" id="seating-grid"></div>
             </section>
 
