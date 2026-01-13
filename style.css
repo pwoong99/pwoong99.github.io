@@ -77,19 +77,6 @@ body {
     opacity: 1;
     z-index: 200;
     /* Highest priority */
-    animation: fadeIn 0.4s ease-out forwards;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 /* --- Home Dashboard --- */
@@ -105,12 +92,13 @@ body {
     align-items: stretch;
     /* Full height */
     position: relative;
-    transition: opacity 0.5s;
     z-index: 100;
     padding: 2rem 4rem;
     /* Horizontal padding */
     box-sizing: border-box;
     gap: 40px;
+    overflow-x: auto;
+    /* Allow scrolling if really needed */
 }
 
 /* Main Content Area (Title + Nav) */
@@ -128,7 +116,6 @@ body {
 .home-title {
     text-align: center;
     margin-bottom: 40px;
-    animation: fadeIn 0.8s ease-out;
     width: 100%;
 }
 
@@ -237,13 +224,18 @@ body {
 /* --- Sidebar Widgets --- */
 .sidebar-widgets {
     width: 320px;
-    /* Fixed width sidebar */
+    min-width: 320px;
+    /* Prevent crushing */
+    flex-shrink: 0;
+    /* Important: Do not shrink */
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 20px;
     height: 100%;
     padding: 20px 0;
+    overflow-y: auto;
+    /* Handle overflow if too tall */
 }
 
 .widget {
@@ -321,7 +313,6 @@ body {
     padding: 40px;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
-    animation: fadeIn 0.4s ease-out;
 }
 
 /* Dashboard Cards */

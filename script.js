@@ -68,22 +68,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // If clicking the same link, do nothing
         if (currentActive === targetSection) return;
 
-        // 1. Activate New Section (Fade In)
+        // 1. Activate New Section (Instant)
         if (targetSection) {
             targetSection.classList.remove('hidden-section');
             targetSection.classList.add('active-section');
         }
 
-        // 2. Deactivate Old Section (Fade Out)
+        // 2. Deactivate Old Section (Instant)
         if (currentActive) {
             currentActive.classList.remove('active-section');
-            currentActive.classList.add('exit-section');
-
-            // Wait for animation to finish, then hide
-            setTimeout(() => {
-                currentActive.classList.remove('exit-section');
-                currentActive.classList.add('hidden-section');
-            }, 500); // 500ms matches CSS animation
+            currentActive.classList.add('hidden-section');
         }
     }
 
