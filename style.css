@@ -217,16 +217,20 @@ body {
     position: static;
     transform: none;
     display: flex;
+    flex-direction: row;
+    /* Explicitly row */
+    flex-wrap: nowrap;
+    /* Enforce single line */
     justify-content: center;
+    /* Center the group */
     align-items: center;
-    /* Align items vertically center */
     gap: 15px;
-    width: 80%;
-    max-width: 900px;
+    width: 95%;
+    /* Use more space */
+    max-width: 1200px;
+    /* Allow wider spread */
     flex-grow: 0;
-    /* Don't expand to fill extra space */
     margin: 0 auto;
-    /* Center horizontally */
 }
 
 .widget {
