@@ -42,21 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Date Display
     const updateDate = () => {
         const now = new Date();
-        const year = now.getFullYear();
-        const month = now.getMonth() + 1;
-        const date = now.getDate();
-        const days = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
-        const dayName = days[now.getDay()];
-
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         const dateEl = document.getElementById('current-date');
-        if (dateEl) {
-            // 2026년 <br> 1월 13일 <br> 화요일
-            dateEl.innerHTML = `
-                <div class="calendar-year">${year}년</div>
-                <div class="calendar-date">${month}월 ${date}일</div>
-                <div class="calendar-day">${dayName}</div>
-            `;
-        }
+        if (dateEl) dateEl.textContent = now.toLocaleDateString('ko-KR', options);
     };
     updateDate();
 

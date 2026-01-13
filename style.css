@@ -86,37 +86,23 @@ body {
     height: 100%;
     /* Fill the container */
     display: flex;
-    flex-direction: row;
-    /* Horizontal layout: Content + Sidebar */
-    justify-content: space-between;
-    align-items: stretch;
-    /* Full height */
+    flex-direction: column;
+    justify-content: space-evenly;
+    /* Distribute vertical space evenly */
+    align-items: center;
     position: relative;
     z-index: 100;
-    padding: 2rem 4rem;
-    /* Horizontal padding */
+    padding: 2vh 0;
+    /* Use vh for padding */
     box-sizing: border-box;
-    gap: 40px;
-    overflow-x: auto;
-    /* Allow scrolling if really needed */
-}
-
-/* Main Content Area (Title + Nav) */
-.home-main-content {
-    flex: 1;
-    /* Take remaining space */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    /* Center vertically */
-    align-items: center;
-    height: 100%;
 }
 
 .home-title {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
+    /* Reduced from 30px */
     width: 100%;
+    /* Ensure full width for centering */
 }
 
 .home-title h1 {
@@ -148,24 +134,29 @@ body {
 
 .nav-grid {
     display: grid;
-    grid-template-columns: repeat(3, 180px);
+    grid-template-columns: repeat(4, 180px);
+    /* Changed to 4 columns */
     justify-content: center;
     align-content: center;
     gap: 20px;
-    /* Reduced gap */
     width: 100%;
     margin-bottom: 0;
-    /* Remove fixed margin, let justify-content handle it */
     transform: scale(0.9);
-    /* Slight scale down to fit better */
 }
 
 /* Responsiveness for smaller screens (Tablets/Phones) */
+@media (max-width: 900px) {
+
+    /* Adjusted breakpoint for 4 cols */
+    .nav-grid {
+        grid-template-columns: repeat(3, 180px);
+        /* Fallback to 3 */
+    }
+}
+
 @media (max-width: 768px) {
     .nav-grid {
         grid-template-columns: repeat(2, 180px);
-        /* 2 columns on tablets */
-        gap: 20px;
     }
 
     .home-title h1 {
@@ -221,41 +212,38 @@ body {
     color: var(--text-primary);
 }
 
-/* --- Sidebar Widgets --- */
-.sidebar-widgets {
-    width: 320px;
-    min-width: 320px;
-    /* Prevent crushing */
-    flex-shrink: 0;
-    /* Important: Do not shrink */
+/* --- Bottom Widgets --- */
+.bottom-widgets {
+    position: static;
+    transform: none;
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    gap: 20px;
-    height: 100%;
-    padding: 20px 0;
-    overflow-y: auto;
-    /* Handle overflow if too tall */
+    align-items: center;
+    /* Align items vertically center */
+    gap: 15px;
+    width: 80%;
+    max-width: 900px;
+    flex-grow: 0;
+    /* Don't expand to fill extra space */
+    margin: 0 auto;
+    /* Center horizontally */
 }
 
 .widget {
     background: white;
-    padding: 20px;
-    border-radius: 20px;
+    padding: 1.5vh 15px;
+    /* Responsive padding */
+    border-radius: 15px;
     flex: 1;
-    /* All widgets take equal height */
-    max-height: 100%;
-    /* Allow filling space */
-    width: 100%;
+    min-width: 120px;
     text-align: center;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
     border: 1px solid rgba(0, 0, 0, 0.05);
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    aspect-ratio: auto;
-    /* Remove aspect ratio constraint if any */
+    max-height: 120px;
+    /* Constrain max height to prevent weird stretching */
 }
 
 .widget h3 {
@@ -266,25 +254,34 @@ body {
     letter-spacing: 1px;
 }
 
-/* Date Widget Styling */
-.calendar-year {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--text-secondary);
-    line-height: 1.2;
-}
-
-.calendar-date {
-    font-size: 2.2rem;
-    font-weight: 800;
-    color: var(--accent-color);
-    margin: 5px 0;
-}
-
-.calendar-day {
-    font-size: 1.8rem;
-    font-weight: 700;
+.center-widget {
+    flex: 2.5;
+    /* Increased width significantly (was 1.5) */
+    background: white;
     color: var(--text-primary);
+}
+
+.center-widget h2 {
+    font-size: 1.2rem;
+    /* Reduced font size (was 1.5rem) */
+    margin: 0;
+    margin-bottom: 5px;
+    background: none;
+    -webkit-text-fill-color: initial;
+    color: white;
+}
+
+.center-widget h3 {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8rem;
+}
+
+.date-display {
+    font-size: 1.2rem;
+    /* Reduced font size (was 1.5rem) */
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-align: center;
 }
 
 /* --- Feature Content Frame --- */
