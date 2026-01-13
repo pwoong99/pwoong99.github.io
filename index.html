@@ -23,56 +23,64 @@
 
         <!-- Main Home Dashboard -->
         <section id="home" class="active-section dashboard-layout">
-            <div class="home-title">
-                <h1>순천성동초등학교<br>6학년 1반의 스마트 교실</h1>
+            <!-- Left: Main Content (Title + Nav) -->
+            <div class="home-main-content">
+                <div class="home-title">
+                    <h1>순천성동초등학교<br>6학년 1반의 스마트 교실</h1>
+                </div>
+
+                <div class="nav-grid">
+                    <!-- Row 1 -->
+                    <button class="nav-card" data-target="links">
+                        <span class="icon">🔗</span>
+                        <span class="label">바로가기</span>
+                    </button>
+                    <button class="nav-card" data-target="games">
+                        <span class="icon">🎮</span>
+                        <span class="label">쉬는시간</span>
+                    </button>
+                    <button class="nav-card" data-target="timetable">
+                        <span class="icon">📅</span>
+                        <span class="label">시간표</span>
+                    </button>
+                    <!-- Row 2 -->
+                    <button class="nav-card" data-target="timer">
+                        <span class="icon">⏳</span>
+                        <span class="label">타이머</span>
+                    </button>
+                    <button class="nav-card" data-target="random">
+                        <span class="icon">🎰</span>
+                        <span class="label">랜덤추첨</span>
+                    </button>
+                    <button class="nav-card" data-target="seating">
+                        <span class="icon">🎲</span>
+                        <span class="label">자리배치</span>
+                    </button>
+                    <!-- Row 3 -->
+                    <button class="nav-card" data-target="guestbook">
+                        <span class="icon">📝</span>
+                        <span class="label">방명록</span>
+                    </button>
+                </div>
             </div>
 
-            <div class="nav-grid">
-                <!-- Row 1 -->
-                <button class="nav-card" data-target="links">
-                    <span class="icon">🔗</span>
-                    <span class="label">바로가기</span>
-                </button>
-                <button class="nav-card" data-target="games">
-                    <span class="icon">🎮</span>
-                    <span class="label">쉬는시간</span>
-                </button>
-                <button class="nav-card" data-target="timetable">
-                    <span class="icon">📅</span>
-                    <span class="label">시간표</span>
-                </button>
-                <!-- Row 2 -->
-                <button class="nav-card" data-target="timer">
-                    <span class="icon">⏳</span>
-                    <span class="label">타이머</span>
-                </button>
-                <button class="nav-card" data-target="random">
-                    <span class="icon">🎰</span>
-                    <span class="label">랜덤추첨</span>
-                </button>
-                <button class="nav-card" data-target="seating">
-                    <span class="icon">🎲</span>
-                    <span class="label">자리배치</span>
-                </button>
-                <!-- Row 3 -->
-                <button class="nav-card" data-target="guestbook">
-                    <span class="icon">📝</span>
-                    <span class="label">방명록</span>
-                </button>
-            </div>
-
-            <div class="bottom-widgets">
+            <!-- Right: Sidebar Widgets -->
+            <div class="sidebar-widgets">
+                <!-- 1. Date Widget -->
+                <div class="widget date-widget">
+                    <div id="current-date"></div>
+                </div>
+                <!-- 2. Weather Widget -->
                 <div class="widget">
                     <h3>오늘의 날씨</h3>
                     <div class="weather-placeholder">맑음 ☀️ 24°C</div>
                 </div>
-                <div class="widget center-widget" style="display:flex; align-items:center; justify-content:center;">
-                    <div class="date-display" id="current-date"></div>
-                </div>
+                <!-- 3. Quote Widget -->
                 <div class="widget">
                     <h3>오늘의 명언</h3>
                     <p id="daily-quote">"배움에는 끝이 없다."</p>
                 </div>
+                <!-- 4. Visitor Widget -->
                 <div class="widget">
                     <h3>방문자 수</h3>
                     <div id="visitor-count" style="font-size: 1.5rem; font-weight: bold;">0</div>
