@@ -10,6 +10,22 @@ import { initWeather, initQuotes, initVisitorCount } from './modules/widgets.js'
 document.addEventListener('DOMContentLoaded', () => {
     console.log("App initialized");
 
+    // --- DOM Elements ---
+    const navCards = document.querySelectorAll('.nav-card');
+    const homeBtn = document.getElementById('global-home-btn');
+
+    // --- Module Initialization ---
+    // Capture return values for modules that expose methods (like reset)
+    const timerModule = initTimer ? initTimer() : null;
+    const seatingModule = initSeating ? initSeating() : null;
+    const randomDrawModule = initRandomDraw ? initRandomDraw() : null;
+
+    // Initialize other modules
+    if (initLinks) initLinks();
+    if (initGames) initGames();
+    if (initTimetable) initTimetable();
+    if (initGuestbook) initGuestbook();
+
     // Initialize Widgets with Error Handling
     try {
         initWeather();
@@ -22,8 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
         initVisitorCount();
     } catch (e) { console.error("Visitor Init Failed", e); }
-
-
 
     // Date Display
     const updateDate = () => {
@@ -70,22 +84,24 @@ document.addEventListener('DOMContentLoaded', () => {
             switchSection(targetId);
 
             // Show Home Button
-            homeBtn.classList.remove('hidden');
+            if (homeBtn) homeBtn.classList.remove('hidden');
         });
     });
 
     // Back to Home
-    homeBtn.addEventListener('click', () => {
-        console.log("Returning to Home");
+    if (homeBtn) {
+        homeBtn.addEventListener('click', () => {
+            console.log("Returning to Home");
 
-        switchSection('home');
+            switchSection('home');
 
-        // Hide Home Button
-        homeBtn.classList.add('hidden');
+            // Hide Home Button
+            homeBtn.classList.add('hidden');
 
-        // Reset Modules
-        if (timerModule && timerModule.reset) timerModule.reset();
-        if (seatingModule && seatingModule.reset) seatingModule.reset();
-        if (randomDrawModule && randomDrawModule.reset) randomDrawModule.reset();
-    });
+            // Reset Modules
+            if (timerModule && timerModule.reset) timerModule.reset();
+            if (seatingModule && seatingModule.reset) seatingModule.reset();
+            if (randomDrawModule && randomDrawModule.reset) randomDrawModule.reset();
+        });
+    }
 });
