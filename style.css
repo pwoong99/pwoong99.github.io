@@ -104,16 +104,16 @@ body {
     /* Not absolute, part of flow */
     transition: opacity 0.5s;
     z-index: 100;
-    padding-top: 40px;
-    /* Significantly reduced from 100px */
-    padding-bottom: 30px;
+    padding-top: 20px;
+    /* Further reduced from 40px */
+    padding-bottom: 20px;
     box-sizing: border-box;
 }
 
 .home-title {
     text-align: center;
-    margin-bottom: 30px;
-    /* Reduced from 50px */
+    margin-bottom: 20px;
+    /* Reduced from 30px */
     animation: fadeIn 0.8s ease-out;
     width: 100%;
     /* Ensure full width for centering */
@@ -155,9 +155,10 @@ body {
     gap: 40px;
     max-width: 900px;
     width: 100%;
+    width: 100%;
     padding: 0 20px;
-    margin: 0 auto 40px auto;
-    /* Reduced from 60px */
+    margin: 0 auto 20px auto;
+    /* Reduced from 40px */
     /* Explicit horizontal centering */
 }
 
@@ -227,7 +228,8 @@ body {
     position: static;
     /* Flow naturally */
     transform: none;
-    margin-top: auto;
+    margin: auto auto 0 auto;
+    /* Top auto for push down, Left/Right auto for center */
     /* Push to bottom if space permits */
     display: flex;
     gap: 15px;
@@ -243,10 +245,10 @@ body {
 
 .widget {
     background: white;
-    padding: 14px;
-    /* Reduced padding (was 20px) */
-    border-radius: 15px;
-    /* Reduced radius (was 20px) */
+    padding: 10px;
+    /* Reduced padding for shorter height (was 14px) */
+    border-radius: 12px;
+    /* Slightly reduced radius */
     flex: 1;
     min-width: 150px;
     /* Ensure they don't get too small */
@@ -264,14 +266,15 @@ body {
 }
 
 .center-widget {
-    flex: 1.5;
+    flex: 2.5;
+    /* Increased width significantly (was 1.5) */
     background: white;
     color: var(--text-primary);
 }
 
 .center-widget h2 {
-    font-size: 1.5rem;
-    /* Reduced font size */
+    font-size: 1.2rem;
+    /* Reduced font size (was 1.5rem) */
     margin: 0;
     margin-bottom: 5px;
     background: none;
@@ -285,8 +288,8 @@ body {
 }
 
 .date-display {
-    font-size: 1.5rem;
-    /* Reduced font size */
+    font-size: 1.2rem;
+    /* Reduced font size (was 1.5rem) */
     font-weight: 700;
     letter-spacing: 1px;
     text-align: center;
