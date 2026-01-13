@@ -20,7 +20,8 @@ body {
     color: var(--text-primary);
     background-color: var(--bg-color);
     min-height: 100vh;
-    padding-bottom: 20px; /* Space for scrolling at bottom */
+    padding-bottom: 20px;
+    /* Space for scrolling at bottom */
 }
 
 /* Cleanup background mesh */
@@ -96,19 +97,23 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Flow from top */
+    justify-content: flex-start;
+    /* Flow from top */
     align-items: center;
-    position: relative; /* Not absolute, part of flow */
+    position: relative;
+    /* Not absolute, part of flow */
     transition: opacity 0.5s;
     z-index: 100;
-    padding-top: 100px;
-    padding-bottom: 50px;
+    padding-top: 40px;
+    /* Significantly reduced from 100px */
+    padding-bottom: 30px;
     box-sizing: border-box;
 }
 
 .home-title {
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
+    /* Reduced from 50px */
     animation: fadeIn 0.8s ease-out;
     width: 100%;
     /* Ensure full width for centering */
@@ -137,7 +142,8 @@ body {
 
 .content-frame section.active-section {
     pointer-events: auto;
-    z-index: 60;
+    z-index: 200;
+    /* Increased to be higher than dashboard (100) */
 }
 
 .nav-grid {
@@ -150,7 +156,8 @@ body {
     max-width: 900px;
     width: 100%;
     padding: 0 20px;
-    margin: 0 auto 60px auto;
+    margin: 0 auto 40px auto;
+    /* Reduced from 60px */
     /* Explicit horizontal centering */
 }
 
@@ -217,23 +224,32 @@ body {
 
 /* --- Bottom Widgets --- */
 .bottom-widgets {
-    position: static; /* Flow naturally */
+    position: static;
+    /* Flow naturally */
     transform: none;
-    margin-top: auto; /* Push to bottom if space permits */
+    margin-top: auto;
+    /* Push to bottom if space permits */
     display: flex;
-    gap: 15px; /* Reduced gap */
-    width: 80%; /* Reduced width */
-    max-width: 800px; /* Reduced max-width (was 1000px) */
-    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: 15px;
+    /* Reduced gap */
+    width: 80%;
+    /* Reduced width */
+    max-width: 800px;
+    /* Reduced max-width (was 1000px) */
+    flex-wrap: wrap;
+    /* Allow wrapping on small screens */
     justify-content: center;
 }
 
 .widget {
     background: white;
-    padding: 14px; /* Reduced padding (was 20px) */
-    border-radius: 15px; /* Reduced radius (was 20px) */
+    padding: 14px;
+    /* Reduced padding (was 20px) */
+    border-radius: 15px;
+    /* Reduced radius (was 20px) */
     flex: 1;
-    min-width: 150px; /* Ensure they don't get too small */
+    min-width: 150px;
+    /* Ensure they don't get too small */
     text-align: center;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
     border: 1px solid rgba(0, 0, 0, 0.05);
@@ -254,7 +270,8 @@ body {
 }
 
 .center-widget h2 {
-    font-size: 1.5rem; /* Reduced font size */
+    font-size: 1.5rem;
+    /* Reduced font size */
     margin: 0;
     margin-bottom: 5px;
     background: none;
@@ -268,7 +285,8 @@ body {
 }
 
 .date-display {
-    font-size: 1.5rem; /* Reduced font size */
+    font-size: 1.5rem;
+    /* Reduced font size */
     font-weight: 700;
     letter-spacing: 1px;
     text-align: center;
