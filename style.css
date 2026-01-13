@@ -19,9 +19,11 @@ body {
     font-family: var(--font-family);
     color: var(--text-primary);
     background-color: var(--bg-color);
-    min-height: 100vh;
-    padding-bottom: 20px;
-    /* Space for scrolling at bottom */
+    height: 100vh;
+    /* Fixed viewport height */
+    overflow: hidden;
+    /* No scrolling on body */
+    padding: 0;
 }
 
 /* Cleanup background mesh */
@@ -32,9 +34,9 @@ body {
 /* Layout Container */
 .app-container {
     width: 100vw;
-    min-height: 100vh;
+    height: 100vh;
     position: relative;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 /* Floating Home Button */
@@ -94,19 +96,18 @@ body {
 /* --- Home Dashboard --- */
 .dashboard-layout {
     width: 100%;
-    min-height: 100vh;
+    height: 100%;
+    /* Fill the container */
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    /* Flow from top */
+    justify-content: space-evenly;
+    /* Distribute vertical space evenly */
     align-items: center;
     position: relative;
-    /* Not absolute, part of flow */
     transition: opacity 0.5s;
     z-index: 100;
-    padding-top: 20px;
-    /* Further reduced from 40px */
-    padding-bottom: 20px;
+    padding: 2vh 0;
+    /* Use vh for padding */
     box-sizing: border-box;
 }
 
@@ -148,18 +149,16 @@ body {
 
 .nav-grid {
     display: grid;
-    /* Responsive Grid: Fits as many 180px columns as possible, then centers them */
     grid-template-columns: repeat(3, 180px);
     justify-content: center;
     align-content: center;
-    gap: 40px;
-    max-width: 900px;
+    gap: 20px;
+    /* Reduced gap */
     width: 100%;
-    width: 100%;
-    padding: 0 20px;
-    margin: 0 auto 20px auto;
-    /* Reduced from 40px */
-    /* Explicit horizontal centering */
+    margin-bottom: 0;
+    /* Remove fixed margin, let justify-content handle it */
+    transform: scale(0.9);
+    /* Slight scale down to fit better */
 }
 
 /* Responsiveness for smaller screens (Tablets/Phones) */
@@ -226,35 +225,35 @@ body {
 /* --- Bottom Widgets --- */
 .bottom-widgets {
     position: static;
-    /* Flow naturally */
     transform: none;
-    margin: auto auto 0 auto;
-    /* Top auto for push down, Left/Right auto for center */
-    /* Push to bottom if space permits */
     display: flex;
-    gap: 15px;
-    /* Reduced gap */
-    width: 80%;
-    /* Reduced width */
-    max-width: 800px;
-    /* Reduced max-width (was 1000px) */
-    flex-wrap: wrap;
-    /* Allow wrapping on small screens */
     justify-content: center;
+    align-items: center;
+    /* Align items vertically center */
+    gap: 15px;
+    width: 80%;
+    max-width: 900px;
+    flex-grow: 0;
+    /* Don't expand to fill extra space */
+    margin: 0 auto;
+    /* Center horizontally */
 }
 
 .widget {
     background: white;
-    padding: 10px;
-    /* Reduced padding for shorter height (was 14px) */
-    border-radius: 12px;
-    /* Slightly reduced radius */
+    padding: 1.5vh 15px;
+    /* Responsive padding */
+    border-radius: 15px;
     flex: 1;
-    min-width: 150px;
-    /* Ensure they don't get too small */
+    min-width: 120px;
     text-align: center;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
     border: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-height: 120px;
+    /* Constrain max height to prevent weird stretching */
 }
 
 .widget h3 {
